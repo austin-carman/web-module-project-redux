@@ -6,6 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 const AddMovieForm = (props) => {
     const { push } = useHistory();
+    let history = useHistory();
 
     const [movie, setMovie] = useState({
         title: "",
@@ -23,6 +24,9 @@ const AddMovieForm = (props) => {
     }
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+        props.addMovie(movie);
+        history.push('/movies/');
     }
 
     const { title, director, genre, metascore, description } = movie;
@@ -67,4 +71,5 @@ const AddMovieForm = (props) => {
     </div>);
 }
 
-export default AddMovieForm;
+
+export default connect(null, { addMovie })(AddMovieForm);
